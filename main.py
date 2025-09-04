@@ -1,15 +1,6 @@
 import pygame, sys
-
+from game import Game
 from player import Player
-
-# Represents the game logic.
-class Game:
-    def __init__(self):
-        player_sprite = Player((SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2))
-        self.player = pygame.sprite.GroupSingle(player_sprite)
-
-    def run(self):
-        self.player.draw(screen)
 
 if __name__ == '__main__':
     # Initialization and constants
@@ -19,7 +10,7 @@ if __name__ == '__main__':
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
     clock = pygame.time.Clock()
     running = True
-    game = Game()
+    game = Game(screen, (SCREEN_WIDTH, SCREEN_HEIGHT))
 
     # Game loop
     while running:
