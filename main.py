@@ -1,4 +1,6 @@
 import pygame, sys
+from game import Game
+from player import Player
 
 def main():
     # Initialization and constants
@@ -8,6 +10,7 @@ def main():
     screen = pygame.display.set_mode()
     clock = pygame.time.Clock()
     running = True
+    game = Game()
 
     # Game loop
     while running:
@@ -17,6 +20,7 @@ def main():
                 running = False
 
         screen.fill((30, 30, 30))
+        game.run()
 
         pygame.display.flip()
         clock.tick(60
