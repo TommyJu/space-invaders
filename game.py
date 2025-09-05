@@ -5,6 +5,7 @@ import obstacle
 import alien
 import extra_alien
 from random import randint, choice
+import collision
 
 # Represents the game logic.
 class Game:
@@ -46,41 +47,17 @@ class Game:
          self.alien_lasers.add(alien.create_laser(self.aliens))
 
 
-    def player_laser_collision_checks(self):
-        if self.player.sprite.lasers:
-            for laser in self.player.sprite.lasers:
-                # Obstacle collision
-                if pygame.sprite.spritecollide(laser, self.obstacle_blocks, dokill = True):
-                    laser.kill()
-                # Alien collision
-                if pygame.sprite.spritecollide(laser, self.aliens, dokill = True):
-                    laser.kill()
-                # Extra alien collision
-                if pygame.sprite.spritecollide(laser, self.aliens, dokill = True):
-                    laser.kill()
-        
-    def alien_laser_collision_checks(self):
-        if self.alien_lasers:
-            for laser in self.alien_lasers:
-                # Obstacle collision
-                if pygame.sprite.spritecollide(laser, self.obstacle_blocks, dokill = True):
-                    laser.kill()
-                # Player collision
-                if pygame.sprite.spritecollide(laser, self.player, dokill = False):
-                    laser.kill()
-                    print("Player Hit")
-                    # TODO: Game over logic
-
     def run(self):
         # Updating game state
         self.player.update()
         self.aliens.update(self.aliens_x_direction)
-        self.aliens_x_direction = alien.check_collision(self.aliens, self.aliens_x_direction)
         self.alien_lasers.update()
         self.extra_alien_timer()
         self.extra_alien.update()
-        self.alien_laser_collision_checks()
-        self.player_laser_collision_checks()
+        # Collision checks
+        self.aliens_x_direction = collision.alien_screen_collision(self.aliens, self.aliens_x_direction)
+        collision.alien_laser_collision_checks(self.alien_lasers, self.player, self.obstacle_blocks)
+        collision.player_laser_collision_checks(self.player, self.aliens, self.obstacle_blocks)
         # Drawing sprites to the screen
         self.player.sprite.lasers.draw(self.screen)
         self.player.draw(self.screen)

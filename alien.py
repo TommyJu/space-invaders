@@ -11,8 +11,8 @@ class Alien(pygame.sprite.Sprite):
         self.image = pygame.image.load(file_path).convert_alpha()
         self.rect = self.image.get_rect(topleft = (x, y))
 
-    def update(self, x_direction):
-        self.rect.x += x_direction
+    def update(self, aliens_x_direction):
+        self.rect.x += aliens_x_direction
 
 # Returns a list of alien sprites
 def alien_setup():
@@ -27,13 +27,13 @@ def alien_setup():
 
     return aliens
 
-def check_collision(aliens, x_direction):
+def check_collision(aliens, aliens_x_direction):
     for alien in aliens:
-        # Horizontal collision
+        # Horizontal collision with screen
         if alien.rect.left <= 0 or alien.rect.right >= screen_size.SCREEN_WIDTH:
             shift_aliens_down(aliens)
-            return x_direction * -1
-    return x_direction
+            return aliens_x_direction * -1
+    return aliens_x_direction
 
 def shift_aliens_down(aliens):
     for alien in aliens:
