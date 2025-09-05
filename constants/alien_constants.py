@@ -4,3 +4,6 @@ X_OFFSET = 60
 Y_OFFSET = 60
 COLORS = ["yellow", "green", "red"]
 COLLISION_Y_SHIFT = 15
+LASER_SPEED = -6
+LASER_COLOR = "red"
+LASER_COOLDOWN = 700

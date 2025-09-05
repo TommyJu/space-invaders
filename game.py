@@ -22,6 +22,7 @@ class Game:
 
         # Initializing aliens
         self.aliens = pygame.sprite.Group()
+        self.alien_lasers = pygame.sprite.Group()
         self.aliens.add(alien.alien_setup())
         self.aliens_x_direction = self.DEFAULT_ALIEN_X_DIRECTION
 
@@ -33,4 +34,8 @@ class Game:
         self.player.draw(self.screen)
         self.obstacle_blocks.draw(self.screen)
         self.aliens.draw(self.screen)
+        self.alien_lasers.update()
+        self.alien_lasers.draw(self.screen)
 
+    def alien_shoot(self):
+         self.alien_lasers.add(alien.create_laser(self.aliens))

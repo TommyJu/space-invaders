@@ -2,6 +2,7 @@ import pygame
 from random import choice
 from constants import alien_constants
 from constants import screen_size
+from laser import Laser
 
 class Alien(pygame.sprite.Sprite):
     def __init__(self, color, x, y):
@@ -37,3 +38,8 @@ def check_collision(aliens, x_direction):
 def shift_aliens_down(aliens):
     for alien in aliens:
         alien.rect.y += alien_constants.COLLISION_Y_SHIFT
+
+def create_laser(aliens):
+    if aliens:
+        random_alien = choice(aliens.sprites())
+        return Laser(random_alien.rect.center, alien_constants.LASER_SPEED, alien_constants.LASER_COLOR)
