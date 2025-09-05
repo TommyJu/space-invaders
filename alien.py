@@ -30,5 +30,10 @@ def check_collision(aliens, x_direction):
     for alien in aliens:
         # Horizontal collision
         if alien.rect.left <= 0 or alien.rect.right >= screen_size.SCREEN_WIDTH:
+            shift_aliens_down(aliens)
             return x_direction * -1
     return x_direction
+
+def shift_aliens_down(aliens):
+    for alien in aliens:
+        alien.rect.y += alien_constants.COLLISION_Y_SHIFT

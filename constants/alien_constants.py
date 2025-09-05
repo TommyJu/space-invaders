@@ -3,3 +3,4 @@ COLUMNS = 8
 X_OFFSET = 60
 Y_OFFSET = 60
 COLORS = ["yellow", "green", "red"]
+COLLISION_Y_SHIFT = 15
