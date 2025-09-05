@@ -9,7 +9,7 @@ class Game:
         self.screen = screen
         
         # Initializing the player instance variable
-        player_sprite = Player((screen_size.SCREEN_WIDTH / 2, screen_size.SCREEN_HEIGHT / 2))
+        player_sprite = Player((screen_size.SCREEN_WIDTH / 2, screen_size.SCREEN_HEIGHT))
         self.player = pygame.sprite.GroupSingle(player_sprite)
 
     def run(self):
