@@ -3,9 +3,9 @@ from alien import shift_aliens_down
 from constants import screen_size
 
 # Wrapper function for all collision checks with side effects and no return values
-def handle_side_effect_collisions(player, aliens, alien_lasers, obstacle_blocks, extra_alien):
-        alien_laser_collision_checks(alien_lasers, player, obstacle_blocks)
-        player_laser_collision_checks(player, aliens, extra_alien, obstacle_blocks)
+def handle_side_effect_collisions(player, obstacle_blocks, alien_manager):
+        alien_laser_collision_checks(alien_manager.alien_lasers, player, obstacle_blocks)
+        player_laser_collision_checks(player, alien_manager.aliens, alien_manager.extra_alien, obstacle_blocks)
 
 def alien_screen_collision(aliens, aliens_x_direction):
     for alien in aliens:

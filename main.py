@@ -24,7 +24,7 @@ if __name__ == '__main__':
                 running = False
 
             if event.type == ALIEN_LASER:
-                game.alien_shoot()
+                game.alien_manager.alien_shoot()
 
         screen.fill((30, 30, 30))
         game.run()
