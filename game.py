@@ -46,6 +46,31 @@ class Game:
          self.alien_lasers.add(alien.create_laser(self.aliens))
 
 
+    def player_laser_collision_checks(self):
+        if self.player.sprite.lasers:
+            for laser in self.player.sprite.lasers:
+                # Obstacle collision
+                if pygame.sprite.spritecollide(laser, self.obstacle_blocks, dokill = True):
+                    laser.kill()
+                # Alien collision
+                if pygame.sprite.spritecollide(laser, self.aliens, dokill = True):
+                    laser.kill()
+                # Extra alien collision
+                if pygame.sprite.spritecollide(laser, self.aliens, dokill = True):
+                    laser.kill()
+        
+    def alien_laser_collision_checks(self):
+        if self.alien_lasers:
+            for laser in self.alien_lasers:
+                # Obstacle collision
+                if pygame.sprite.spritecollide(laser, self.obstacle_blocks, dokill = True):
+                    laser.kill()
+                # Player collision
+                if pygame.sprite.spritecollide(laser, self.player, dokill = False):
+                    laser.kill()
+                    print("Player Hit")
+                    # TODO: Game over logic
+
     def run(self):
         # Updating game state
         self.player.update()
@@ -54,6 +79,8 @@ class Game:
         self.alien_lasers.update()
         self.extra_alien_timer()
         self.extra_alien.update()
+        self.alien_laser_collision_checks()
+        self.player_laser_collision_checks()
         # Drawing sprites to the screen
         self.player.sprite.lasers.draw(self.screen)
         self.player.draw(self.screen)
