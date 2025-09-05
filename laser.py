@@ -1,5 +1,4 @@
 import pygame
-import screen_size
 
 class Laser(pygame.sprite.Sprite):
     LASER_SPEED = 8
@@ -14,8 +13,7 @@ class Laser(pygame.sprite.Sprite):
         if self.rect.y < -self.rect.height:
             self.kill()
 
+    # Updates laser position and clear off-screen lasers
     def update(self):
-        print(self.rect.y)
-        # Move the lazer upward upon firing
         self.rect.y -= self.LASER_SPEED
         self.destroy()
