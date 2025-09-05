@@ -1,16 +1,15 @@
 import pygame, sys
 from game import Game
 from player import Player
+import screen_size
 
 if __name__ == '__main__':
     # Initialization and constants
     pygame.init()
-    SCREEN_WIDTH = 600
-    SCREEN_HEIGHT = 600
-    screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+    screen = pygame.display.set_mode((screen_size.SCREEN_WIDTH, screen_size.SCREEN_HEIGHT))
     clock = pygame.time.Clock()
     running = True
-    game = Game(screen, (SCREEN_WIDTH, SCREEN_HEIGHT))
+    game = Game(screen)
 
     # Game loop
     while running:

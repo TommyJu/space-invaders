@@ -1,4 +1,5 @@
 import pygame
+import screen_size
 
 # Represents the player sprite by inheriting from pygame's sprite class.
 class Player(pygame.sprite.Sprite):
@@ -13,9 +14,9 @@ class Player(pygame.sprite.Sprite):
     def get_input(self):
         keys = pygame.key.get_pressed()
 
-        if keys[pygame.K_RIGHT]:
+        if keys[pygame.K_RIGHT] and self.rect.x < (screen_size.SCREEN_WIDTH - self.rect.width):
             self.rect.x += self.MOVEMENT_SPEED
-        if keys[pygame.K_LEFT]:
+        if keys[pygame.K_LEFT] and self.rect.x > 0:
             self.rect.x -= self.MOVEMENT_SPEED
 
     def update(self):
