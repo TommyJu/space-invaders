@@ -1,0 +1,5 @@
+ROWS = 4
+COLUMNS = 8
+X_OFFSET = 60
+Y_OFFSET = 60
+COLORS = ["yellow", "green", "red"]
