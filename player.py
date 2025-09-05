@@ -1,5 +1,5 @@
 import pygame
-import screen_size
+from constants import screen_size
 from laser import Laser
 
 # Represents the player sprite by inheriting from pygame's sprite class.

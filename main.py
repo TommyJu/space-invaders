@@ -1,7 +1,7 @@
 import pygame, sys
 from game import Game
 from player import Player
-import screen_size
+from constants import screen_size
 
 if __name__ == '__main__':
     # Initialization and constants
