@@ -9,7 +9,7 @@ class Player(pygame.sprite.Sprite):
 
     def __init__(self, pos: tuple[int, int]):
         super().__init__()
-        self.image = pygame.image.load('assets/graphics/player.png').convert_alpha()
+        self.image = pygame.image.load('assets/graphics/space_ship.png').convert_alpha()
         self.rect = self.image.get_rect(midbottom = pos)
         
         self.laser_ready = True

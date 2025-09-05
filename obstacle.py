@@ -18,7 +18,7 @@ def create_obstacle(x_start, y_start, offset_x):
             if col == 'x':
                 x = x_start + offset_x + (col_index * obstacle_constants.BLOCK_SIZE)
                 y = y_start + (row_index * obstacle_constants.BLOCK_SIZE)
-                blocks.append(Block(obstacle_constants.BLOCK_SIZE, "red", x, y))
+                blocks.append(Block(obstacle_constants.BLOCK_SIZE, obstacle_constants.COLOR, x, y))
     
     return blocks
 

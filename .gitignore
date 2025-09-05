@@ -1,2 +1,4 @@
 /__pycache__
 constants/__pycache__
+*/__pycache__
+/constants/__pycache__

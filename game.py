@@ -6,6 +6,7 @@ import alien
 
 # Represents the game logic.
 class Game:
+    DEFAULT_ALIEN_X_DIRECTION = 1
 
     def __init__(self, screen: pygame.display):
         # Initializing the screen dependency 
@@ -22,9 +23,12 @@ class Game:
         # Initializing aliens
         self.aliens = pygame.sprite.Group()
         self.aliens.add(alien.alien_setup())
+        self.aliens_x_direction = self.DEFAULT_ALIEN_X_DIRECTION
 
     def run(self):
         self.player.update()
+        self.aliens.update(self.aliens_x_direction)
+        self.aliens_x_direction = alien.check_collision(self.aliens, self.aliens_x_direction)
         self.player.sprite.lasers.draw(self.screen)
         self.player.draw(self.screen)
         self.obstacle_blocks.draw(self.screen)

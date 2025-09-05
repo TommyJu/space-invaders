@@ -5,7 +5,7 @@ class Laser(pygame.sprite.Sprite):
     def __init__(self, pos: tuple[int, int]):
         super().__init__()
         self.image = pygame.Surface((4, 20))
-        self.image.fill("white")
+        self.image.fill("cyan")
         self.rect = self.image.get_rect(center = pos)
 
     # Removes lasers that have moved beyond the viewport
