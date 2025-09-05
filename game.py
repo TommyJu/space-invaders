@@ -3,12 +3,14 @@ import pygame
 
 # Represents the game logic.
 class Game:
-    def __init__(self, screen, screen_size):
-        self._screen = screen
-        self._width, self._height = screen_size
+    def __init__(self, screen: pygame.display, screen_size: tuple[int, int]):
+        # Initializing the screen dependency 
+        self.screen = screen
+        self.width, self.height = screen_size
         
-        player_sprite = Player((self._width / 2, self._height / 2))
-        self._player = pygame.sprite.GroupSingle(player_sprite)
+        # Initializing the player instance variable
+        player_sprite = Player((self.width / 2, self.height / 2))
+        self.player = pygame.sprite.GroupSingle(player_sprite)
 
     def run(self):
-        self._player.draw(self._screen)
+        self.player.draw(self.screen)
