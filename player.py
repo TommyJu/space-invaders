@@ -1,5 +1,6 @@
 import pygame
 import screen_size
+from laser import Laser
 
 # Represents the player sprite by inheriting from pygame's sprite class.
 class Player(pygame.sprite.Sprite):
@@ -13,6 +14,7 @@ class Player(pygame.sprite.Sprite):
         
         self.laser_ready = True
         self.laser_fire_time = 0
+        self.lasers = pygame.sprite.Group()
 
     def get_input(self):
         keys = pygame.key.get_pressed()
@@ -25,8 +27,7 @@ class Player(pygame.sprite.Sprite):
 
         # Laser beam =====
         if keys[pygame.K_SPACE] and self.laser_ready:
-            # self.shoot_laser()
-            print("pew")
+            self.shoot_laser()
             # Disable the laser and log the fire time to enforce laser cooldown
             self.laser_ready = False
             self.laser_fire_time = pygame.time.get_ticks()
@@ -37,6 +38,10 @@ class Player(pygame.sprite.Sprite):
         if current_time > self.laser_fire_time + self.LASER_COOLDOWN:
             self.laser_ready = True
 
+    def shoot_laser(self):
+        self.lasers.add(Laser(self.rect.center))
+
     def update(self):
         self.get_input()
         self.laser_recharge()
+        self.lasers.update()
