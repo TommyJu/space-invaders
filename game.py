@@ -56,8 +56,7 @@ class Game:
         self.extra_alien.update()
         # Collision checks
         self.aliens_x_direction = collision.alien_screen_collision(self.aliens, self.aliens_x_direction)
-        collision.alien_laser_collision_checks(self.alien_lasers, self.player, self.obstacle_blocks)
-        collision.player_laser_collision_checks(self.player, self.aliens, self.obstacle_blocks)
+        collision.handle_side_effect_collisions(self.player, self.aliens, self.alien_lasers, self.obstacle_blocks, self.extra_alien)
         # Drawing sprites to the screen
         self.player.sprite.lasers.draw(self.screen)
         self.player.draw(self.screen)
