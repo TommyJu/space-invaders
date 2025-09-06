@@ -4,6 +4,7 @@ from player import Player
 
 class LivesDisplay:
     LIFE_IMAGE_OFFSET = 12
+    LIFE_IMAGE_Y_POS = 8
 
     def __init__(self, player):
         self.player = player
@@ -13,5 +14,5 @@ class LivesDisplay:
 
     def draw(self, screen):
         for life in range(self.player.sprite.lives):
-            x = self.life_x_start + (life * self.life_image.get_width() + self.LIFE_IMAGE_OFFSET)
-            screen.blit(self.life_image, (x, 8))
+            x = self.life_x_start + life * (self.life_image.get_width() + self.LIFE_IMAGE_OFFSET)
+            screen.blit(self.life_image, (x, self.LIFE_IMAGE_Y_POS))

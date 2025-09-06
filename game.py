@@ -9,8 +9,6 @@ import lives_display
 
 # Represents the game logic.
 class Game:
-    DEFAULT_ALIEN_X_DIRECTION = 1
-
     def __init__(self, screen: pygame.display):
         # Initializing the screen dependency 
         self.screen = screen
