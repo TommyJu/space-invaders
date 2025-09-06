@@ -39,7 +39,7 @@ class Game:
         # Collision checks
         aliens_direction = collision.alien_screen_collision(self.alien_manager.aliens, self.alien_manager.aliens_x_direction)
         self.alien_manager.set_aliens_x_direction(aliens_direction)
-        collision.handle_side_effect_collisions(self.player, self.obstacle_blocks, self.alien_manager)
+        collision.handle_side_effect_collisions(self.player, self.obstacle_blocks, self.alien_manager, self.score)
         # Drawing sprites to the screen
         self.player.sprite.lasers.draw(self.screen)
         self.player.draw(self.screen)

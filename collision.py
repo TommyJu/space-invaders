@@ -3,9 +3,9 @@ from alien import shift_aliens_down
 from constants import screen_size
 
 # Wrapper function for all collision checks with side effects and no return values
-def handle_side_effect_collisions(player, obstacle_blocks, alien_manager):
+def handle_side_effect_collisions(player, obstacle_blocks, alien_manager, score):
         alien_laser_collision_checks(alien_manager.alien_lasers, player, obstacle_blocks)
-        player_laser_collision_checks(player, alien_manager.aliens, alien_manager.extra_alien, obstacle_blocks)
+        player_laser_collision_checks(player, alien_manager.aliens, alien_manager.extra_alien, obstacle_blocks, score)
 
 def alien_screen_collision(aliens, aliens_x_direction):
     for alien in aliens:
@@ -16,7 +16,7 @@ def alien_screen_collision(aliens, aliens_x_direction):
     return aliens_x_direction
 
 
-def player_laser_collision_checks(player, aliens, extra_alien, obstacle_blocks):
+def player_laser_collision_checks(player, aliens, extra_alien, obstacle_blocks, score):
     if player.sprite.lasers:
         for laser in player.sprite.lasers:
             # Obstacle collision
@@ -25,9 +25,11 @@ def player_laser_collision_checks(player, aliens, extra_alien, obstacle_blocks):
             # Alien collision
             if pygame.sprite.spritecollide(laser, aliens, dokill = True):
                 laser.kill()
+                score.increment_score()
             # Extra alien collision
             if pygame.sprite.spritecollide(laser, extra_alien, dokill = True):
                 laser.kill()
+                score.increment_score()
     
 
 def alien_laser_collision_checks(alien_lasers, player, obstacle_blocks):

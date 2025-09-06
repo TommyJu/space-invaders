@@ -12,3 +12,7 @@ class Score():
     def draw(self, screen):
         text_surface = self.font.render(f"Score: {self.score}", False, "white")
         screen.blit(text_surface, (self.SCORE_PAD_X, self.SCORE_Y_POS))
+    
+
+    def increment_score(self):
+        self.score += 100
