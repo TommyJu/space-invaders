@@ -1,4 +1,4 @@
-import pygame
+import pygame, sys
 from alien import shift_aliens_down
 from constants import screen_size
 
@@ -39,5 +39,9 @@ def alien_laser_collision_checks(alien_lasers, player, obstacle_blocks):
             # Player collision
             if pygame.sprite.spritecollide(laser, player, dokill = False):
                 laser.kill()
-                print("Player Hit")
-                # TODO: Game over logic
+                player.sprite.damage()
+                print(f"Player Hit! Remaining lives: {player.sprite.lives}")
+                # Game over logic
+                if player.sprite.is_dead():
+                    pygame.quit()
+                    sys.exit()

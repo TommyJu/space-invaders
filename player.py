@@ -6,7 +6,7 @@ from laser import Laser
 class Player(pygame.sprite.Sprite):
     MOVEMENT_SPEED = 5
     LASER_COOLDOWN = 600
-    STARTING_LIVES = 3
+    STARTING_LIVES = 1
 
     def __init__(self, pos: tuple[int, int]):
         super().__init__()
@@ -49,7 +49,7 @@ class Player(pygame.sprite.Sprite):
         self.lives = max(0, self.lives - amount)
 
     def is_dead(self):
-        return self.health <= 0
+        return self.lives <= 0
 
     def update(self):
         self.get_input()
