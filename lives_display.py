@@ -4,7 +4,7 @@ from player import Player
 
 class LivesDisplay:
     LIFE_IMAGE_OFFSET = 12
-    LIFE_IMAGE_Y_POS = 8
+    LIFE_IMAGE_Y_POS = 16
 
     def __init__(self, player):
         self.player = player

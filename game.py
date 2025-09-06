@@ -6,6 +6,8 @@ from random import randint, choice
 import collision
 import alien_manager
 import lives_display
+import score
+
 
 # Represents the game logic.
 class Game:
@@ -24,8 +26,11 @@ class Game:
         # Initializing alien manager
         self.alien_manager = alien_manager.AlienManager()
 
-        # Initializing UI elements
+        # Initializing player lives UI
         self.lives_display = lives_display.LivesDisplay(self.player)
+
+        # Initializing game score
+        self.score = score.Score()
 
     def run(self):
         # Updating game state
@@ -41,3 +46,4 @@ class Game:
         self.obstacle_blocks.draw(self.screen)
         self.alien_manager.draw(self.screen)
         self.lives_display.draw(self.screen)
+        self.score.draw(self.screen)

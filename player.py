@@ -12,6 +12,7 @@ class Player(pygame.sprite.Sprite):
         super().__init__()
         self.image = pygame.image.load('assets/graphics/space_ship.png').convert_alpha()
         self.rect = self.image.get_rect(midbottom = pos)
+
         # Player lasers
         self.laser_ready = True
         self.laser_fire_time = 0
