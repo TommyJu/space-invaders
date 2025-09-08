@@ -4,6 +4,7 @@ from random import randint, choice
 import extra_alien
 import alien
 
+# Represents the state of the aliens during the game
 class AlienManager:
     def __init__(self):
         self.aliens = pygame.sprite.Group()

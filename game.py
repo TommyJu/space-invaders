@@ -7,6 +7,7 @@ import collision
 import alien_manager
 import lives_display
 import score
+import screen_effect
 
 
 # Represents the game logic.
@@ -32,6 +33,8 @@ class Game:
         # Initializing game score
         self.score = score.Score()
 
+        self.screen_effect = screen_effect.ScreenEffect()
+
     def run(self):
         # Updating game state
         self.player.update()
@@ -41,6 +44,7 @@ class Game:
         self.alien_manager.set_aliens_x_direction(aliens_direction)
         collision.handle_side_effect_collisions(self.player, self.obstacle_blocks, self.alien_manager, self.score)
         # Drawing sprites to the screen
+        self.screen_effect.draw(self.screen)
         self.player.sprite.lasers.draw(self.screen)
         self.player.draw(self.screen)
         self.obstacle_blocks.draw(self.screen)
