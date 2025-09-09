@@ -2,7 +2,6 @@ from player import Player
 import pygame
 from constants import screen_size
 import obstacle
-from random import randint, choice
 import collision
 import alien_manager
 import lives_display
@@ -13,27 +12,26 @@ import screen_effect
 # Represents the game logic.
 class Game:
     def __init__(self, screen: pygame.display):
-        # Initializing the screen dependency 
         self.screen = screen
+        self.screen_effect = screen_effect.ScreenEffect()
         
-        # Initializing the player instance variable
         player_sprite = Player((screen_size.SCREEN_WIDTH / 2, screen_size.SCREEN_HEIGHT))
         self.player = pygame.sprite.GroupSingle(player_sprite)
 
-        # Initializing obstacles
         self.obstacle_blocks = pygame.sprite.Group()
         self.obstacle_blocks.add(obstacle.create_multiple_obstacles())
 
-        # Initializing alien manager
         self.alien_manager = alien_manager.AlienManager()
 
-        # Initializing player lives UI
         self.lives_display = lives_display.LivesDisplay(self.player)
 
-        # Initializing game score
         self.score = score.Score()
 
-        self.screen_effect = screen_effect.ScreenEffect()
+        # Game audio
+        self.music = pygame.mixer.Sound("./assets/audio/music.wav")
+        self.music.set_volume(0.2)
+        self.music.play(loops = -1)
+
 
     def run(self):
         # Updating game state
