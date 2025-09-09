@@ -37,23 +37,36 @@ if __name__ == '__main__':
                 game.alien_manager.alien_shoot()
 
             if event.type == GAME_OVER_EVENT:
-                game_state_manager.game_state = GAME_OVER
+                game_state_manager.switch_game_state_game_over()
 
             if event.type == WAVE_CLEARED_EVENT:
-                pass
+                game_state_manager.switch_game_state_wave_cleared()
 
             # Handle key press events used to navigate to the next game state
             if event.type == pygame.KEYDOWN:
                 # Press enter to restart if game over
                 if game_state_manager.game_state == GAME_OVER and event.key == pygame.K_RETURN:
+                    
+                    # Create a fresh game instance for restart
                     game = Game(screen)
+                    
                     game_state_manager.game_state = PLAYING
+
+                # Press enter to continue if wave cleared
+                if game_state_manager.game_state == WAVE_CLEARED and event.key == pygame.K_RETURN:
+                    # TODO implement logic for keeping score, lives, and increasing difficulty. Then go to next round
+                    game_state_manager.increment_waves_cleared()
+                    
+                    game_state_manager.switch_game_state_playing()
         
         screen.fill((30, 30, 30))
         
         # Show different screens depending on the current game state
         if game_state_manager.game_state == PLAYING:
             game.run()
+
+        elif game_state_manager.game_state == WAVE_CLEARED:
+            ScreenOverlay.wave_cleared(screen)
         
         elif game_state_manager.game_state == GAME_OVER:
             ScreenOverlay.game_over(screen)

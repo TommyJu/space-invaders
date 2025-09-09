@@ -8,6 +8,7 @@ class GameStateManager:
     
     def __init__(self):
         self.game_state = PLAYING
+        self.waves_cleared = 0
 
     # Mutators for game state
     def switch_game_state_wave_cleared(self):
@@ -18,6 +19,9 @@ class GameStateManager:
 
     def switch_game_state_game_over(self):
         self.game_state = GAME_OVER
+
+    def increment_waves_cleared(self):
+        self.waves_cleared += 1
 
     # Game state checks
     
