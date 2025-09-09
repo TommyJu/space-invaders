@@ -1,24 +1,25 @@
-import pygame, sys
-from alien import shift_aliens_down
+import pygame
 from constants import screen_size
 from audio_manager import AudioManager
-from events import GAME_OVER_EVENT
 
-# Wrapper function for all collision checks with side effects and no return values
-def handle_side_effect_collisions(player, obstacle_blocks, alien_manager, score):
-        alien_laser_collision_checks(alien_manager.alien_lasers, player, obstacle_blocks)
-        player_laser_collision_checks(player, alien_manager.aliens, alien_manager.extra_alien, obstacle_blocks, score)
+# Wrapper function for all collision checks
+def handle_collisions(player, obstacle_blocks, alien_manager, score):
+        alien_screen_collision(alien_manager)
+        alien_laser_collision_checks(alien_manager, player, obstacle_blocks)
+        player_laser_collision_checks(player, alien_manager, obstacle_blocks, score)
 
-def alien_screen_collision(aliens, aliens_x_direction):
-    for alien in aliens:
+
+def alien_screen_collision(alien_manager):
+    for alien in alien_manager.aliens:
         # Horizontal collision with screen
         if alien.rect.left <= 0 or alien.rect.right >= screen_size.SCREEN_WIDTH:
-            shift_aliens_down(aliens)
-            return aliens_x_direction * -1
-    return aliens_x_direction
+            alien_manager.flip_aliens_x_direction()
+            alien_manager.shift_aliens_down()
+            return
+            
 
 # Checks collisions for the player's laser
-def player_laser_collision_checks(player, aliens, extra_alien, obstacle_blocks, score):
+def player_laser_collision_checks(player, alien_manager, obstacle_blocks, score):
     if player.sprite.lasers:
         for laser in player.sprite.lasers:
             
@@ -27,23 +28,23 @@ def player_laser_collision_checks(player, aliens, extra_alien, obstacle_blocks, 
                 laser.kill()
             
             # Alien collision
-            if pygame.sprite.spritecollide(laser, aliens, dokill = True):
+            if pygame.sprite.spritecollide(laser, alien_manager.aliens, dokill = True):
                 laser.kill()
-                score.increment_score()
+                score.increment_score_alien_hit()
                 # Alien kill sound effect
                 AudioManager.play_alien_hit_sound()
             
             # Extra alien collision
-            if pygame.sprite.spritecollide(laser, extra_alien, dokill = True):
+            if pygame.sprite.spritecollide(laser, alien_manager.extra_alien, dokill = True):
                 laser.kill()
-                score.increment_score()
+                score.increment_score_extra_alien_hit()
                 AudioManager.play_extra_alien_hit_sound()
     
 
 # Checks the collisions for the alien lasers
-def alien_laser_collision_checks(alien_lasers, player, obstacle_blocks):
-    if alien_lasers:
-        for laser in alien_lasers:
+def alien_laser_collision_checks(alien_manager, player, obstacle_blocks):
+    if alien_manager.alien_lasers:
+        for laser in alien_manager.alien_lasers:
             
             # Obstacle collision
             if pygame.sprite.spritecollide(laser, obstacle_blocks, dokill = True):

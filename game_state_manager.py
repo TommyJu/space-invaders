@@ -23,6 +23,9 @@ class GameStateManager:
     def increment_waves_cleared(self):
         self.waves_cleared += 1
 
+    def reset_waves_cleared(self):
+        self.waves_cleared = 0
+
     # Game state checks
     
     def check_game_over(player, aliens):

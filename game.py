@@ -31,18 +31,19 @@ class Game:
 
 
     def run(self):
+
         # Updating game state
         self.player.update()
         self.alien_manager.update()
-        
+
+        # Collision checks    
+        collision.handle_collisions(self.player, self.obstacle_blocks, self.alien_manager, self.score)
+
+        # Game state checks       
         GameStateManager.check_game_over(self.player.sprite, self.alien_manager.aliens)
         GameStateManager.check_wave_cleared(self.alien_manager.aliens)
 
-        # Collision checks
-        aliens_direction = collision.alien_screen_collision(self.alien_manager.aliens, self.alien_manager.aliens_x_direction)
-        self.alien_manager.set_aliens_x_direction(aliens_direction)
-        collision.handle_side_effect_collisions(self.player, self.obstacle_blocks, self.alien_manager, self.score)
-        
+
         # Drawing sprites to the screen
         self.screen_effect.draw(self.screen)
         self.player.sprite.lasers.draw(self.screen)

@@ -1,4 +1,5 @@
 import pygame
+from constants import alien_constants
 
 # Represents and displays the player's score
 class Score():
@@ -14,5 +15,8 @@ class Score():
         screen.blit(text_surface, (self.SCORE_PAD_X, self.SCORE_Y_POS))
     
 
-    def increment_score(self):
-        self.score += 100
+    def increment_score_alien_hit(self):
+        self.score += alien_constants.ALIEN_POINTS
+
+    def increment_score_extra_alien_hit(self):
+        self.score += alien_constants.EXTRA_ALIEN_POINTS

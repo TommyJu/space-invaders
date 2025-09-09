@@ -19,9 +19,6 @@ if __name__ == '__main__':
     running = True
     game = Game(screen)
 
-    # Periodically triggering an event to signal alien laser fire at set intervals
-    pygame.time.set_timer(ALIEN_LASER_EVENT, alien_constants.LASER_COOLDOWN)
-    
     # Game state
     game_state_manager = GameStateManager()
 
@@ -50,13 +47,21 @@ if __name__ == '__main__':
                     # Create a fresh game instance for restart
                     game = Game(screen)
                     
+                    game_state_manager.reset_waves_cleared()
                     game_state_manager.game_state = PLAYING
 
                 # Press enter to continue if wave cleared
                 if game_state_manager.game_state == WAVE_CLEARED and event.key == pygame.K_RETURN:
-                    # TODO implement logic for keeping score, lives, and increasing difficulty. Then go to next round
+                    
                     game_state_manager.increment_waves_cleared()
                     
+                    if game_state_manager.waves_cleared == 1:
+                        game.alien_manager.change_difficulty_medium()
+                        
+                    else:
+                        game.alien_manager.change_difficulty_hard()
+                
+                    game.alien_manager.alien_setup()
                     game_state_manager.switch_game_state_playing()
         
         screen.fill((30, 30, 30))
