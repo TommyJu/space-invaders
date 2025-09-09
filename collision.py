@@ -21,15 +21,18 @@ def alien_screen_collision(aliens, aliens_x_direction):
 def player_laser_collision_checks(player, aliens, extra_alien, obstacle_blocks, score):
     if player.sprite.lasers:
         for laser in player.sprite.lasers:
+            
             # Obstacle collision
             if pygame.sprite.spritecollide(laser, obstacle_blocks, dokill = True):
                 laser.kill()
+            
             # Alien collision
             if pygame.sprite.spritecollide(laser, aliens, dokill = True):
                 laser.kill()
                 score.increment_score()
                 # Alien kill sound effect
                 AudioManager.play_alien_hit_sound()
+            
             # Extra alien collision
             if pygame.sprite.spritecollide(laser, extra_alien, dokill = True):
                 laser.kill()
@@ -41,17 +44,12 @@ def player_laser_collision_checks(player, aliens, extra_alien, obstacle_blocks, 
 def alien_laser_collision_checks(alien_lasers, player, obstacle_blocks):
     if alien_lasers:
         for laser in alien_lasers:
+            
             # Obstacle collision
             if pygame.sprite.spritecollide(laser, obstacle_blocks, dokill = True):
                 laser.kill()
+            
             # Player collision
             if pygame.sprite.spritecollide(laser, player, dokill = False):
                 laser.kill()
                 player.sprite.damage()
-                # sound_effect = pygame.mixer.Sound("assets/audio/player_damage.mp3")
-                # sound_effect.set_volume(sound_settings.ALIEN_KILL_VOLUME)
-                # sound_effect.play()
-                
-                # Game over logic
-                if player.sprite.is_dead():
-                    pygame.event.post(pygame.event.Event(GAME_OVER_EVENT))

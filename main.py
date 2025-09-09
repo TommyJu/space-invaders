@@ -7,6 +7,7 @@ from screen_overlay import ScreenOverlay
 from events import GAME_OVER_EVENT, ALIEN_LASER_EVENT, WAVE_CLEARED_EVENT
 from game_states import GAME_OVER, WAVE_CLEARED, PLAYING
 from audio_manager import AudioManager
+from game_state_manager import GameStateManager
 
 if __name__ == '__main__':
     # Initialization and constants
@@ -22,13 +23,12 @@ if __name__ == '__main__':
     pygame.time.set_timer(ALIEN_LASER_EVENT, alien_constants.LASER_COOLDOWN)
     
     # Game state
-    game_state = PLAYING
+    game_state_manager = GameStateManager()
 
     # Game loop
     while running:
         # Event handling logic
         for event in pygame.event.get():
-            # Ending the game loop in response to QUIT event
             if event.type == pygame.QUIT:
                 pygame.mixer.quit()
                 running = False
@@ -37,25 +37,25 @@ if __name__ == '__main__':
                 game.alien_manager.alien_shoot()
 
             if event.type == GAME_OVER_EVENT:
-                game_state = GAME_OVER
+                game_state_manager.game_state = GAME_OVER
 
             if event.type == WAVE_CLEARED_EVENT:
                 pass
 
-            # Handle key press events in response to current game state
+            # Handle key press events used to navigate to the next game state
             if event.type == pygame.KEYDOWN:
                 # Press enter to restart if game over
-                if game_state == GAME_OVER and event.key == pygame.K_RETURN:
+                if game_state_manager.game_state == GAME_OVER and event.key == pygame.K_RETURN:
                     game = Game(screen)
-                    game_state = PLAYING
+                    game_state_manager.game_state = PLAYING
         
         screen.fill((30, 30, 30))
         
-        # Respond to current game state
-        if game_state == PLAYING:
+        # Show different screens depending on the current game state
+        if game_state_manager.game_state == PLAYING:
             game.run()
         
-        elif game_state == GAME_OVER:
+        elif game_state_manager.game_state == GAME_OVER:
             ScreenOverlay.game_over(screen)
 
         pygame.display.flip()
