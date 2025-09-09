@@ -1,5 +1,4 @@
 import pygame
-from constants import sound_settings
 
 # A utility class for playing the game's audio
 class AudioManager:

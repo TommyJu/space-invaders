@@ -1,7 +1,8 @@
 import pygame, sys
 from alien import shift_aliens_down
-from constants import screen_size, sound_settings
+from constants import screen_size
 from audio_manager import AudioManager
+from events import GAME_OVER_EVENT
 
 # Wrapper function for all collision checks with side effects and no return values
 def handle_side_effect_collisions(player, obstacle_blocks, alien_manager, score):
@@ -16,7 +17,7 @@ def alien_screen_collision(aliens, aliens_x_direction):
             return aliens_x_direction * -1
     return aliens_x_direction
 
-
+# Checks collisions for the player's laser
 def player_laser_collision_checks(player, aliens, extra_alien, obstacle_blocks, score):
     if player.sprite.lasers:
         for laser in player.sprite.lasers:
@@ -36,6 +37,7 @@ def player_laser_collision_checks(player, aliens, extra_alien, obstacle_blocks, 
                 AudioManager.play_extra_alien_hit_sound()
     
 
+# Checks the collisions for the alien lasers
 def alien_laser_collision_checks(alien_lasers, player, obstacle_blocks):
     if alien_lasers:
         for laser in alien_lasers:
@@ -46,10 +48,10 @@ def alien_laser_collision_checks(alien_lasers, player, obstacle_blocks):
             if pygame.sprite.spritecollide(laser, player, dokill = False):
                 laser.kill()
                 player.sprite.damage()
-                sound_effect = pygame.mixer.Sound("assets/audio/player_damage.mp3")
-                sound_effect.set_volume(sound_settings.ALIEN_KILL_VOLUME)
-                sound_effect.play()
+                # sound_effect = pygame.mixer.Sound("assets/audio/player_damage.mp3")
+                # sound_effect.set_volume(sound_settings.ALIEN_KILL_VOLUME)
+                # sound_effect.play()
+                
                 # Game over logic
                 if player.sprite.is_dead():
-                    pygame.quit()
-                    sys.exit()
+                    pygame.event.post(pygame.event.Event(GAME_OVER_EVENT))

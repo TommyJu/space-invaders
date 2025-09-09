@@ -1,6 +1,6 @@
 from player import Player
 import pygame
-from constants import screen_size, sound_settings
+from constants import screen_size
 import obstacle
 import collision
 import alien_manager
@@ -31,8 +31,6 @@ class Game:
         
         # Background music
         AudioManager.play_background_music()
-        
-
 
     def run(self):
         # Updating game state

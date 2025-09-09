@@ -1,0 +1,5 @@
+import pygame
+
+ALIEN_LASER_EVENT = pygame.USEREVENT + 1
+GAME_OVER_EVENT = pygame.USEREVENT + 2
+WAVE_CLEARED_EVENT = pygame.USEREVENT + 3

@@ -1,5 +1,5 @@
 import pygame
-from constants import screen_size, sound_settings
+from constants import screen_size
 from laser import Laser
 from audio_manager import AudioManager
 
