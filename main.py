@@ -2,7 +2,6 @@ import pygame, sys
 from game import Game
 from player import Player
 from constants import screen_size
-from constants import alien_constants
 from screen_overlay import ScreenOverlay
 from events import GAME_OVER_EVENT, ALIEN_LASER_EVENT, WAVE_CLEARED_EVENT
 from game_states import GAME_OVER, WAVE_CLEARED, PLAYING
@@ -35,14 +34,17 @@ if __name__ == '__main__':
 
             if event.type == GAME_OVER_EVENT:
                 game_state_manager.switch_game_state_game_over()
+                AudioManager.play_game_over_sound()
 
             if event.type == WAVE_CLEARED_EVENT:
                 game_state_manager.switch_game_state_wave_cleared()
+                AudioManager.play_wave_complete_sound()
 
             # Handle key press events used to navigate to the next game state
             if event.type == pygame.KEYDOWN:
                 # Press enter to restart if game over
                 if game_state_manager.game_state == GAME_OVER and event.key == pygame.K_RETURN:
+                    AudioManager.play_game_start_sound()
                     
                     # Create a fresh game instance for restart
                     game = Game(screen)
@@ -52,6 +54,7 @@ if __name__ == '__main__':
 
                 # Press enter to continue if wave cleared
                 if game_state_manager.game_state == WAVE_CLEARED and event.key == pygame.K_RETURN:
+                    AudioManager.play_wave_start_sound()
                     
                     game_state_manager.increment_waves_cleared()
                     

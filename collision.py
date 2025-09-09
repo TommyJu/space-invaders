@@ -52,5 +52,6 @@ def alien_laser_collision_checks(alien_manager, player, obstacle_blocks):
             
             # Player collision
             if pygame.sprite.spritecollide(laser, player, dokill = False):
+                AudioManager.play_player_damage_sound()
                 laser.kill()
                 player.sprite.damage()
