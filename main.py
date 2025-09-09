@@ -6,11 +6,13 @@ from constants import alien_constants
 from screen_overlay import ScreenOverlay
 from events import GAME_OVER_EVENT, ALIEN_LASER_EVENT, WAVE_CLEARED_EVENT
 from game_states import GAME_OVER, WAVE_CLEARED, PLAYING
+from audio_manager import AudioManager
 
 if __name__ == '__main__':
     # Initialization and constants
     pygame.init()
     pygame.mixer.init()
+    AudioManager.play_background_music()
     screen = pygame.display.set_mode((screen_size.SCREEN_WIDTH, screen_size.SCREEN_HEIGHT))
     clock = pygame.time.Clock()
     running = True
@@ -28,6 +30,7 @@ if __name__ == '__main__':
         for event in pygame.event.get():
             # Ending the game loop in response to QUIT event
             if event.type == pygame.QUIT:
+                pygame.mixer.quit()
                 running = False
 
             if event.type == ALIEN_LASER_EVENT:
@@ -39,11 +42,19 @@ if __name__ == '__main__':
             if event.type == WAVE_CLEARED_EVENT:
                 pass
 
+            # Handle key press events in response to current game state
+            if event.type == pygame.KEYDOWN:
+                # Press enter to restart if game over
+                if game_state == GAME_OVER and event.key == pygame.K_RETURN:
+                    game = Game(screen)
+                    game_state = PLAYING
+        
         screen.fill((30, 30, 30))
         
-        # Game state conditionals
+        # Respond to current game state
         if game_state == PLAYING:
             game.run()
+        
         elif game_state == GAME_OVER:
             ScreenOverlay.game_over(screen)
 

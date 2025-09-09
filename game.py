@@ -28,9 +28,6 @@ class Game:
 
         self.score = score.Score()
 
-        
-        # Background music
-        AudioManager.play_background_music()
 
     def run(self):
         # Updating game state
