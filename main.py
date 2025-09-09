@@ -7,6 +7,7 @@ from constants import alien_constants
 if __name__ == '__main__':
     # Initialization and constants
     pygame.init()
+    pygame.mixer.init()
     screen = pygame.display.set_mode((screen_size.SCREEN_WIDTH, screen_size.SCREEN_HEIGHT))
     clock = pygame.time.Clock()
     running = True

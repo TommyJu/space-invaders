@@ -1,6 +1,7 @@
 import pygame
 from constants import screen_size, sound_settings
 from laser import Laser
+from audio_manager import AudioManager
 
 # Represents the player sprite by inheriting from pygame's sprite class.
 class Player(pygame.sprite.Sprite):
@@ -45,10 +46,7 @@ class Player(pygame.sprite.Sprite):
 
     def shoot_laser(self):
         self.lasers.add(Laser(self.rect.center))
-        # Laser sound effect
-        sound_effect = pygame.mixer.Sound("assets/audio/laser.wav")
-        sound_effect.set_volume(sound_settings.LASER_VOLUME)
-        sound_effect.play()
+        AudioManager.play_laser_sound()
 
     def damage(self, amount=1):
         self.lives = max(0, self.lives - amount)

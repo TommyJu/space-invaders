@@ -7,6 +7,7 @@ import alien_manager
 import lives_display
 import score
 import screen_effect
+from audio_manager import AudioManager
 
 
 # Represents the game logic.
@@ -27,10 +28,10 @@ class Game:
 
         self.score = score.Score()
 
-        # Game audio
-        self.music = pygame.mixer.Sound("./assets/audio/music.wav")
-        self.music.set_volume(sound_settings.BACKGROUND_VOLUME)
-        self.music.play(loops = -1)
+        
+        # Background music
+        AudioManager.play_background_music()
+        
 
 
     def run(self):
