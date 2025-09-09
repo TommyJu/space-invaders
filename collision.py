@@ -1,6 +1,6 @@
 import pygame, sys
 from alien import shift_aliens_down
-from constants import screen_size
+from constants import screen_size, sound_settings
 
 # Wrapper function for all collision checks with side effects and no return values
 def handle_side_effect_collisions(player, obstacle_blocks, alien_manager, score):
@@ -26,6 +26,10 @@ def player_laser_collision_checks(player, aliens, extra_alien, obstacle_blocks, 
             if pygame.sprite.spritecollide(laser, aliens, dokill = True):
                 laser.kill()
                 score.increment_score()
+                # Alien kill sound effect
+                sound_effect = pygame.mixer.Sound("assets/audio/explosion.wav")
+                sound_effect.set_volume(sound_settings.ALIEN_KILL_VOLUME)
+                sound_effect.play()
             # Extra alien collision
             if pygame.sprite.spritecollide(laser, extra_alien, dokill = True):
                 laser.kill()

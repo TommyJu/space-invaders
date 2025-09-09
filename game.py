@@ -1,6 +1,6 @@
 from player import Player
 import pygame
-from constants import screen_size
+from constants import screen_size, sound_settings
 import obstacle
 import collision
 import alien_manager
@@ -29,7 +29,7 @@ class Game:
 
         # Game audio
         self.music = pygame.mixer.Sound("./assets/audio/music.wav")
-        self.music.set_volume(0.2)
+        self.music.set_volume(sound_settings.BACKGROUND_VOLUME)
         self.music.play(loops = -1)
 
 
