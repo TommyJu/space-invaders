@@ -6,8 +6,6 @@ import collision
 import alien_manager
 import lives_display
 import score
-import screen_effect
-from audio_manager import AudioManager
 from game_state_manager import GameStateManager
 
 
@@ -15,7 +13,6 @@ from game_state_manager import GameStateManager
 class Game:
     def __init__(self, screen: pygame.display):
         self.screen = screen
-        self.screen_effect = screen_effect.ScreenEffect()
         
         player_sprite = Player((screen_size.SCREEN_WIDTH / 2, screen_size.SCREEN_HEIGHT))
         self.player = pygame.sprite.GroupSingle(player_sprite)
@@ -45,7 +42,6 @@ class Game:
 
 
         # Drawing sprites to the screen
-        self.screen_effect.draw(self.screen)
         self.player.sprite.lasers.draw(self.screen)
         self.player.draw(self.screen)
         self.obstacle_blocks.draw(self.screen)
