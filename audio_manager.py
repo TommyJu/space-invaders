@@ -2,10 +2,10 @@ import pygame
 
 # A utility class for playing the game's audio
 class AudioManager:
-    BACKGROUND_VOLUME = 0.05
-    LASER_VOLUME = 0.2
-    HIT_VOLUME = 0.2
-    SCREEN_OVERLAY_VOLUME = 0.2
+    BACKGROUND_VOLUME = 0.5
+    LASER_VOLUME = 0.8
+    HIT_VOLUME = 0.8
+    SCREEN_OVERLAY_VOLUME = 0.8
     
     def play_background_music():
         music = pygame.mixer.Sound("./assets/audio/background_music.mp3")
