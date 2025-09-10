@@ -77,7 +77,7 @@ if __name__ == '__main__':
             ScreenOverlay.wave_cleared(screen)
         
         elif game_state_manager.game_state == GAME_OVER:
-            ScreenOverlay.game_over(screen)
+            ScreenOverlay.game_over(screen, game.score.score)
 
         pygame.display.flip()
         clock.tick(60)

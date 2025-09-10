@@ -7,7 +7,7 @@ from audio_manager import AudioManager
 class Player(pygame.sprite.Sprite):
     MOVEMENT_SPEED = 5
     LASER_COOLDOWN = 600
-    STARTING_LIVES = 3
+    STARTING_LIVES = 1
 
     def __init__(self, pos: tuple[int, int]):
         super().__init__()
